@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "./Action/action";
+import { useEffect } from "react";
+const App = () => {
+  const dispatch = useDispatch();
 
-function App() {
+  const users = useSelector((state) => state.user.users);
+  const loading = useSelector((state) => state.user.loading);
+  const error = useSelector((state) => state.user.error);
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {loading && <h2>Loading .....</h2>}
+      {error && !loading && <h2>{error}</h2>}
+      <h1>REDUX SAGA</h1>
+      {users && users.map((usr, i) => <h2 key={i}>{usr.name}</h2>)}
+    </>
   );
-}
+};
 
 export default App;
