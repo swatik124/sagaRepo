@@ -16,7 +16,7 @@ const App = () => {
     <>
       {loading && <h2>Loading .....</h2>}
       {error && !loading && <h2>{error}</h2>}
-      <h1>REDUX SAGA</h1>
+      <h1>REDUX SAGAs</h1>
       {users && users.map((usr, i) => <h2 key={i}>{usr.name}</h2>)}
     </>
   );
